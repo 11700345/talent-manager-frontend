@@ -1,0 +1,17 @@
+<h1>Overzicht klanten</h1>
+
+<input type="text" [(ngModel)]="searchString" (keyup)="onChange()"
+class="form-control" placeholder="Zoek op naam"/>
+<button (click)="onClick()">Voeg klant toe</button>
+<table class="table table-striped">
+    <tr>
+        <th>Naam</th>
+        <th>Sector</th>
+    </tr>
+    <tr *ngFor="let customer of filteredCustomers"
+    (click)="onCustomerClick(customer.uuid)"
+    class="customer-row">
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.industry }}</td>
+    </tr>
+</table>

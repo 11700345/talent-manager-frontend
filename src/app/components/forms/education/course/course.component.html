@@ -1,0 +1,56 @@
+<section class="form-container text-center">
+  <h1>Cursussen</h1>
+  <h3>Voeg een nieuwe cursus toe</h3>
+
+  <section class="row">
+    <form class="col-5" [formGroup]="form" (ngSubmit)="submitCourse(form)">
+
+      <label>Titel</label>
+      <input type="text" formControlName="title" placeholder="Titel" class="form-control"/>
+      <p *ngIf="form.get('title').hasError('required') && form.get('title').touched" class="error">Dit veld is verplicht.</p>
+
+      <label>Organisator</label>
+      <input type="text" formControlName="organizer" placeholder="Organisator" class="form-control"/>
+      <p *ngIf="form.get('organizer').hasError('required') && form.get('organizer').touched" class="error">Dit veld is verplicht.</p>
+
+      <label>Startdatum</label>
+      <input type="date" formControlName="startDate" class="form-control"/>
+      <p *ngIf="form.get('startDate').hasError('required') && form.get('startDate').touched" class="error">Dit veld is verplicht.</p>
+
+      <label>Einddatum</label>
+      <input type="date" formControlName="endDate" class="form-control"/>
+      <p *ngIf="form.get('endDate').hasError('required') && form.get('endDate').touched" class="error">Dit veld is verplicht.</p>
+      <p *ngIf="form.hasError('invalidDate')" class="error">De einddatum mag zich niet voor de startdatum bevinden.</p>
+
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" formControlName="includedInCv" class="custom-control-input" id="includedInCv"/>
+        <label class="custom-control-label" for="includedInCv">Toevoegen aan CV: </label>
+      </div>
+
+      <button class="btn btn-secondary" type="submit" [disabled]="form.invalid">Voeg toe</button>
+    </form>
+    <section class="table-container">
+      <table class="table table-striped col-7" *ngIf="courses.length > 0">
+        <tr>
+          <th>Titel</th>
+          <th>Organisator</th>
+          <th>Startdatum</th>
+          <th>Einddatum</th>
+          <th>Actie</th>
+        </tr>
+        <tr *ngFor="let course of courses; let i = index">
+          <td>{{ course.title }}</td>
+          <td>{{ course.organizer }}</td>
+          <td>{{ course.startDate }}</td>
+          <td>{{ course.endDate }}</td>
+          <td>
+            <button (click)="deleteCourse(i)" class="btn btn-outline-danger">🗑</button>
+          </td>
+        </tr>
+      </table>
+
+    </section>
+
+  </section>
+
+</section>

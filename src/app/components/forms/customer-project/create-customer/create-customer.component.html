@@ -1,0 +1,35 @@
+<h1>Maak een nieuwe klant aan</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+    <label>Naam</label>
+    <input type="text" placeholder="Naam"
+    formControlName="name" />
+    <p *ngIf="form.get('name').hasError('required') && form.get('name').touched" class="error">
+        Dit veld is verplicht.
+    </p>
+    
+    <label>Sector</label>
+    <input type="text" placeholder="sector"
+    formControlName="industry" />
+    <p *ngIf="form.get('industry').hasError('required') && form.get('industry').touched" class="error">
+        Dit veld is verplicht.
+    </p>
+
+    <label>Beschrijving (Nederlands)</label>
+    <input type="text" placeholder="Beschrijving (Nederlands)"
+    formControlName="descriptionNl" />
+    <p *ngIf="form.get('descriptionNl').hasError('required') && form.get('descriptionNl').touched" class="error">
+        Dit veld is verplicht.
+    </p>
+
+    <label>Beschrijving (Engels)</label>
+    <input type="text" placeholder="Beschrijving (Engels)"
+    formControlName="descriptionEng" />
+    <p *ngIf="form.get('descriptionEng').hasError('required') && form.get('descriptionEng').touched" class="error">
+        Dit veld is verplicht.
+    </p>
+
+    <button type="submit" [disabled]="form.invalid">
+        Voeg toe
+    </button>
+</form>

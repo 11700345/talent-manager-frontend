@@ -1,0 +1,65 @@
+<section class="form-container text-center">
+  <h1>Certificaten</h1>
+  <h3>Voeg een nieuw certificaat toe</h3>
+  <section class="row">
+    <form [formGroup]="form" class="col-2" (ngSubmit)="submitCertificate(form)">
+
+      <label>Instituut</label>
+      <input type="text" class="form-control" formControlName="institute" placeholder="Instituut"/>
+      <p *ngIf="form.get('institute').hasError('required') && form.get('institute').touched" class="error">Dit veld is
+        verplicht.</p>
+
+      <label>Naam</label>
+      <input type="text" class="form-control" formControlName="name" placeholder="Naam"/>
+      <p *ngIf="form.get('name').hasError('required') && form.get('name').touched" class="error">Dit veld is
+        verplicht.</p>
+
+      <label>Omschrijving</label>
+      <input type="text" class="form-control" formControlName="description" placeholder="Omschrijving"/>
+      <p *ngIf="form.get('description').hasError('required') && form.get('description').touched" class="error">Dit veld
+        is verplicht.</p>
+
+      <label>Datum behaald</label>
+      <input type="date" class="form-control" formControlName="startDate"/>
+      <p *ngIf="form.get('startDate').hasError('required') && form.get('startDate').touched" class="error">Dit veld is
+        verplicht.</p>
+
+      <label>Einddatum</label>
+      <input type="date" class="form-control" formControlName="endDate"/>
+      <p *ngIf="form.hasError('invalidDate')" class="error">De einddatum mag zich niet voor de startdatum bevinden.</p>
+
+      <label>URL certificaat (optioneel)</label>
+      <input type="text" class="form-control" formControlName="urlPersonalCertificate"
+             placeholder="URL certificaat"/>
+      <p *ngIf="form.get('urlPersonalCertificate').hasError('invalidUrl') && form.get('urlPersonalCertificate').touched" class="error">
+        U dient een geldige URL in te geven.
+      </p>
+
+      <button type="submit" class="btn btn-secondary" [disabled]="form.invalid">Voeg toe</button>
+    </form>
+    <section class="table-container">
+      <table class="table table-striped col-10" *ngIf="certificates.length > 0">
+        <tr>
+          <th>Instituut</th>
+          <th>Naam</th>
+          <th>Omschrijving</th>
+          <th>Datum behaald</th>
+          <th>Datum vervallen</th>
+          <th>URL naar persoonlijk certificaat</th>
+        </tr>
+        <tr *ngFor="let certificate of certificates; let i = index">
+          <td>{{ certificate.institute }}</td>
+          <td>{{ certificate.name }}</td>
+          <td>{{ certificate.description }}</td>
+          <td>{{ certificate.dateAchieved }}</td>
+          <td>{{ certificate.dateExpiration }}</td>
+          <td>{{ certificate.urlPersonalCertificate }}</td>
+          <td>
+            <button (click)="deleteCertificate(i)" class="btn btn-outline-danger">🗑</button>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </section>
+
+</section>

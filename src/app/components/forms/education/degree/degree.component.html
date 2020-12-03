@@ -1,0 +1,58 @@
+<section class="form-container text-center">
+  <h1>Opleidingen</h1>
+  <h3>Voeg een nieuwe opleiding toe</h3>
+
+  <section class="row">
+
+    <form class="col-5" [formGroup]="form" (ngSubmit)="submitDegree(form)">
+
+      <label>Instituut</label>
+      <input type="text" class="form-control" formControlName="institute" placeholder="Instituut"/>
+      <p *ngIf="form.get('institute').hasError('required') && form.get('institute').touched" class="error">Dit veld is
+        verplicht.</p>
+
+      <label>Naam opleiding</label>
+      <input type="text" class="form-control" formControlName="name" placeholder="Naam opleiding"/>
+      <p *ngIf="form.get('name').hasError('required') && form.get('name').touched" class="error">Dit veld is
+        verplicht.</p>
+
+      <label>Specialisatie</label>
+      <input type="text" class="form-control" formControlName="specialisation" placeholder="Specialisatie"/>
+
+      <label>Startdatum</label>
+      <input type="date" class="form-control" formControlName="startDate"/>
+      <p *ngIf="form.get('startDate').hasError('required') && form.get('startDate').touched" class="error">Dit veld is
+        verplicht.</p>
+
+      <label>Einddatum</label>
+      <input type="date" class="form-control" formControlName="endDate"/>
+      <p *ngIf="form.get('endDate').hasError('required') && form.get('endDate').touched" class="error">Dit veld is
+        verplicht.</p>
+      <p *ngIf="form.hasError('invalidDate')" class="error">De einddatum mag zich niet voor de startdatum
+        bevinden.</p>
+
+      <button type="submit" class="btn btn-secondary" [disabled]="form.invalid">Voeg toe</button>
+    </form>
+    <section class="table-container">
+      <table class="table table-striped col-7" *ngIf="degrees.length > 0">
+        <tr>
+          <th>Instituut</th>
+          <th>Naam</th>
+          <th>Specialisatie</th>
+          <th>Startdatum</th>
+          <th>Einddatum</th>
+        </tr>
+        <tr *ngFor="let degree of degrees, let i = index">
+          <td>{{ degree.institute }}</td>
+          <td>{{ degree.name }}</td>
+          <td>{{ degree.specialisation }}</td>
+          <td>{{ degree.startDate }}</td>
+          <td>{{ degree.endDate }}</td>
+          <td>
+            <button (click)="deleteDegree(i)" class="btn btn-outline-danger">🗑</button>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </section>
+</section>

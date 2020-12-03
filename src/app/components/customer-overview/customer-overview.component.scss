@@ -1,0 +1,19 @@
+input {
+    margin-left: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 10%;
+}
+
+button {
+    float: right;
+}
+
+table {
+    margin-left: 2rem;
+    width: 80%;
+}
+
+.customer-row:hover {
+    background-color: lightgray;
+}

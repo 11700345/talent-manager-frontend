@@ -1,0 +1,50 @@
+<section class="form-container text-center">
+  <h1>Talen</h1>
+  <h3>Voeg een nieuwe taal toe</h3>
+  <section class="row">
+    <form [formGroup]="form" class="col-6" (ngSubmit)="submitLanguage(form)">
+
+      <label>Taal</label>
+      <input type="text" class="form-control" formControlName="name" placeholder="Taal"/>
+      <p *ngIf="form.get('name').hasError('required') && form.get('name').touched" class="error">Dit veld is
+        verplicht.</p>
+
+      <label>Spreekvaardigheid</label>
+      <select class="form-control" formControlName="speakingProficiency">
+        <option *ngFor="let skill of languageSkills" [value]="skill">
+          {{ skill }}
+        </option>
+      </select>
+      <p *ngIf="form.get('speakingProficiency').hasError('required') && form.get('speakingProficiency').touched"
+         class="error">Dit veld is verplicht.</p>
+
+      <label>Schrijfvaardigheid</label>
+      <select formControlName="writingProficiency" class="form-control">
+        <option *ngFor="let skill of languageSkills" [value]="skill">
+          {{ skill }}
+        </option>
+      </select>
+      <p *ngIf="form.get('writingProficiency').hasError('required') && form.get('writingProficiency').touched"
+         class="error">Dit veld is verplicht.</p>
+
+      <button type="submit" class="btn btn-secondary" [disabled]="form.invalid">Voeg toe</button>
+    </form>
+    <section class="table-container">
+      <table class="table table-striped col-6" *ngIf="languages.length > 0">
+        <tr>
+          <th>Taal</th>
+          <th>Spreekvaardigheid</th>
+          <th>Schrijfvaardigheid</th>
+        </tr>
+        <tr *ngFor="let language of languages; let i = index">
+          <td>{{ language.name }}</td>
+          <td>{{ language.speakingProficiency }}</td>
+          <td>{{ language.writingProficiency }}</td>
+          <td>
+            <button (click)="deleteLanguage(i)" class="btn btn-outline-danger">🗑</button>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </section>
+</section>

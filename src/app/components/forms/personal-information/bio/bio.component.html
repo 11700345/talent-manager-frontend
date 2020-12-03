@@ -1,0 +1,26 @@
+<section class="form-container text-center">
+  <h1>Uw bio</h1>
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+  <label>Nederlandse bio</label>
+  <textarea name="dutchBio"
+  formControlName="dutchBio"
+  placeholder="Uw bio (Nederlands)"
+  class="form-control"></textarea>
+  <p *ngIf="form.get('dutchBio').hasError('required') && form.get('dutchBio').touched" class="error">Dit veld is verplicht.</p>
+  <p *ngIf="form.get('dutchBio').hasError('invalidBio') && form.get('dutchBio').touched" class="error">
+    Dit veld mag maximum 200 woorden bevatten.
+  </p>
+
+  <label>Engelse bio</label>
+  <textarea name="englishBio"
+  formControlName="englishBio"
+  placeholder="Uw bio (Engels)"
+  class="form-control"></textarea>
+  <p *ngIf="form.get('englishBio').hasError('required') && form.get('englishBio').touched" class="error">Dit veld is verplicht.</p>
+  <p *ngIf="form.get('englishBio').hasError('invalidBio') && form.get('englishBio').touched" class="error">
+    Dit veld mag maximum 200 woorden bevatten.
+  </p>
+
+</form>
+</section>
+
